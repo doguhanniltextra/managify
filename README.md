@@ -1,165 +1,237 @@
+# Managify - Project Management System
 
-## Project is done
-### Daily Project Updates  
+A comprehensive end-to-end project management system built with Spring Boot and PostgreSQL, featuring real-time communication, issue tracking, and user authentication with JWT tokens.
 
-### 20 October  
-- **Project Initialization**: Set up the project using Spring Initializer and added the PostgreSQL driver.
-- **Database Configuration**:
-  - Configured `application.properties` with PostgreSQL connection details:
-    ```properties
-    spring.application.name=managify
-    spring.datasource.url=
-    spring.datasource.username=
-    spring.datasource.password=
-    spring.datasource.driver-class-name=
-    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-    ```
-  - Created a local "Managify" database.
-- **Security Setup**: Implemented a custom security configuration and added JSON Web Token (JWT) authentication.
+## 🚀 Features
 
-### 21 October  
-- **User Model Creation**:
-   - Defined `User` entity with JPA, including fields `id`, `fullName`, `email`, `password`, and `projectSize`.
-   - Established a one-to-many relationship with `Issues` entity.
-- **Authentication Setup**:
-   - Developed `AuthController` for signup and signin with JWT token generation.
-   - Incorporated `UserRepository` and `PasswordEncoder` for database operations and secure password handling.
-- **JWT Generation & Fixes**:
-   - Implemented JWT generation but resolved a `WeakKeyException` by switching to a 256-bit secure key.
+- **User Authentication & Authorization**: JWT-based secure authentication system
+- **Project Management**: Create, update, delete, and search projects
+- **Issue Tracking**: Complete issue lifecycle management with status updates and assignments
+- **Real-time Communication**: Project-based chat system with messaging
+- **Comment System**: Add comments to issues for better collaboration
+- **Caching**: Redis-based caching for improved performance
+- **Search Functionality**: Advanced project search with keyword filtering
+- **Payment Integration**: Subscription management system
+- **Email Services**: Automated email notifications
 
-### 22 October  
-- **Database Entity Corrections**:
-   - Added `@Table(name = "users")` to `User` entity to resolve table naming conflicts.
-- **Password Matching Issue Fix**:
-   - Corrected `PasswordEncoder` usage to ensure proper credential validation during sign-in.
-- **JWT Finalization**:
-   - Integrated JWT-based authentication successfully for both signup and signin.
+## 🛠️ Tech Stack
 
-### 23 October  
-#### Database Schema Overview  
-- **Entities**:
-   - **Users**: Manages user details like name, email, and project count.
-   - **Issues**: Tracks project-related issues with fields like title, status, priority, and tags.
-   - **Projects**: Contains project data, including name, description, and category.
-   - **Chat**: Represents user-project group chats.
-   - **Messages**: Stores chat messages with timestamps.
-   - **Comments**: Tracks comments on issues.
-- **Relationships**:
-   - Users relate to Issues and Comments.
-   - Issues connect to Projects and Comments.
-   - Chat links Messages, Users, and Projects.
+### Backend
+- **Spring Boot** - Main framework
+- **Spring Security** - Authentication and authorization
+- **Spring Data JPA** - Database operations
+- **PostgreSQL** - Primary database
+- **Redis** - Caching layer
+- **JWT** - Token-based authentication
+- **Maven** - Dependency management
 
-### 24 October  
-- **Schema and Workflow Documentation**: Drafted database schema and visualized main entity relationships.
+### Testing
+- **JUnit 5** - Unit testing framework
+- **Mockito** - Mocking framework
+- **Spring Boot Test** - Integration testing
 
-### 25 October  
-- **Service Enhancements**:
-   - Improved `ChatService`, `ProjectService`, and `UserService` interfaces and implementations to enhance functionality and performance.
-- **Repository Optimization**:
-   - Adjusted repositories for improved data retrieval and storage.
+## 📋 Prerequisites
 
-### 26 October  
-- **DTO Enhancements**:
-   - Refined `IssueDTO.java` for better data handling and issue management.
-- **Controller Updates**:
-   - Enhanced multiple controllers (`AuthController`, `CommentController`, `IssueController`, etc.) to improve functionality and add new endpoints.
-- **Service Interface Extensions**:
-   - Extended interfaces like `CommentService`, `EmailService`, and `IssueService` to support expanded functionalities.
-- **Model Adjustments**:
-   - Refined `Message.java`, `PlanType.java`, and `Subscription.java` for better compatibility and functionality.
-- **Repository Layer Enhancements**:
-   - Improved repositories (e.g., `CommentRepository`, `IssueRepository`) to support more complex queries.
-- **Request & Response Updates**:
-   - Refined request and response objects for consistency and improved API response structure.
-- **Service Implementations**:
-   - Updated various service implementations (e.g., `CommentServiceImp`, `EmailServiceImp`) to enhance business logic and performance.
+- Java 17 or higher
+- PostgreSQL 12+
+- Redis Server
+- Maven 3.6+
 
-### 27 October   
-- Updated JWT configuration files (`JwtConstant`, `JwtProvider`, and `JwtTokenValidator`) to enhance token validation and security mechanisms.
-- Improved error handling in `IssueController` for better exception management.
+## ⚙️ Installation & Setup
 
-### 28 October 
-- Enhanced `PaymentController`, `ProjectController`, and `UserController` to improve error handling and user validation.
-- Minor updates to the `User` model, adding validation layers to strengthen data integrity and security.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/managify.git
+cd managify
+```
 
-### 29 October   
-- Updated `CommentRepository` and `ProjectRepository` with optimizations for query performance.
+### 2. Database Configuration
+Create a PostgreSQL database named `managify`:
+```sql
+CREATE DATABASE managify;
+```
 
-### 30 October   
-- Improved functionality and structure in `CommentServiceImp`, `MessageServicesImp`, and `ProjectServiceImp` to streamline service logic and improve code readability. 
+### 3. Application Configuration
+Update `application.properties` with your database credentials:
+```properties
+spring.application.name=managify
+spring.datasource.url=jdbc:postgresql://localhost:5432/managify
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+```
 
+### 4. Install Dependencies
+```bash
+mvn clean install
+```
 
-## POSTMAN: <a href="https://www.postman.com/spacecraft-astronaut-67997412/managify/overview">Click me!</a>
-| **Endpoint**                            | **Method** | **Description**                      |
-|-----------------------------------------|------------|--------------------------------------|
-| `/auth/signup`                          | POST       | Register a new user                 |
-| `/auth/signing`                         | POST       | Log in a user                       |
-| `/api/users/profile`                    | GET        | Retrieve user profile               |
-| `/api/projects`                         | POST       | Create a new project                |
-| `/api/projects/{id}`                    | GET        | Get project by ID                   |
-| `/api/projects/{id}`                    | DELETE     | Delete project by ID                |
-| `/api/projects`                         | GET        | Get all projects                    |
-| `/api/projects/search?keyword={keyword}`| GET        | Search projects by keyword          |
-| `/api/issues`                           | POST       | Create a new issue                  |
-| `/api/issues/{id}`                      | GET        | Get issue by user ID                |
-| `/api/issues/project/{projectId}`       | GET        | Get all issues by project ID        |
-| `/api/issues/{id}/status/{status}`      | PUT        | Update issue status                 |
-| `/api/issues/{id}/status/{status}`      | DELETE     | Delete issue status                 |
-| `/api/issues/{id}/assignee/{userId}`    | PUT        | Assign an issue to a user           |
-| `/api/projects/{id}/chat`               | GET        | Retrieve chat by project ID         |
-| `/api/messages/chat/{projectId}`        | GET        | Get messages by project ID          |
-| `/api/messages/send`                    | POST       | Send a new message                  |
-| `/api/comments/{id}`                    | GET        | Get a comment by ID                 |
+### 5. Run the Application
+```bash
+mvn spring-boot:run
+```
 
+The application will start on `http://localhost:8080`
 
-### 3 November
+## 📊 Database Schema
 
-- **Cache management** has been implemented in the project controller.
-- The following endpoints now utilize caching:
-  - **GET /api/projects**: The endpoint for listing projects has been cached based on user ID, along with category and tag filters.
-  - **GET /api/projects/{projectId}**: The endpoint for retrieving details of a single project has been cached using the project ID.
-  - **PATCH /api/projects/{projectId}**: When updating a project, the associated cache entry is updated accordingly.
-  - **DELETE /api/projects/{projectId}**: Upon deleting a project, the corresponding project data is removed from the cache.
-  - **GET /api/projects/search**: The endpoint for searching projects by keyword now caches the results.
+### Core Entities
 
+- **Users**: User management with profile information
+- **Projects**: Project details, categories, and metadata
+- **Issues**: Issue tracking with status, priority, and assignments
+- **Comments**: Issue commenting system
+- **Messages**: Real-time messaging for project communication
+- **Chat**: Project-based chat rooms
+- **Subscriptions**: User subscription and payment management
 
-### 4 November
+### Entity Relationships
 
-- **Test for Saving User Information**: Created tests to ensure that user information can be saved successfully in the database and verified by retrieving the saved user by email.
+- Users ↔ Projects (One-to-Many)
+- Projects ↔ Issues (One-to-Many)
+- Issues ↔ Comments (One-to-Many)
+- Users ↔ Comments (One-to-Many)
+- Projects ↔ Chat (One-to-One)
+- Chat ↔ Messages (One-to-Many)
 
-- **Find By Email Test**: Implemented a test to check if a user can be found by their email address and validated the retrieved user's details.
+## 🔗 API Endpoints
 
-- **Find All Users Test**: Added a test to confirm that all users can be retrieved from the database and ensured the list is not empty.
+### Authentication
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/auth/signup` | POST | Register a new user |
+| `/auth/signing` | POST | User login |
 
-- **Find Owner's Projects Test**: Developed a test to find all projects owned by a specific user and validated that the owner ID matches the expected user's ID.
+### User Management
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/users/profile` | GET | Get user profile |
 
-- **Count Projects By User Test**: Implemented a test to verify the number of projects associated with a user.
+### Project Management
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/projects` | POST | Create new project |
+| `/api/projects` | GET | Get all projects |
+| `/api/projects/{id}` | GET | Get project by ID |
+| `/api/projects/{id}` | DELETE | Delete project |
+| `/api/projects/search?keyword={keyword}` | GET | Search projects |
 
-- **Find Project By ID Test**: Created a test to ensure that a project can be found using its ID and validated that the correct project is returned.
+### Issue Management
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/issues` | POST | Create new issue |
+| `/api/issues/{id}` | GET | Get issue by ID |
+| `/api/issues/project/{projectId}` | GET | Get issues by project |
+| `/api/issues/{id}/status/{status}` | PUT | Update issue status |
+| `/api/issues/{id}/assignee/{userId}` | PUT | Assign issue to user |
+| `/api/issues/{id}` | DELETE | Delete issue |
 
-- **Delete Project Test**: Added a test to confirm that a project can be deleted from the database and that it no longer exists afterward.
+### Communication
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/projects/{id}/chat` | GET | Get project chat |
+| `/api/messages/chat/{projectId}` | GET | Get chat messages |
+| `/api/messages/send` | POST | Send message |
+| `/api/comments/{id}` | GET | Get comment by ID |
 
-- **Validate Project Owner and Name Test**: Implemented a test to check that each project returned for a user has the correct owner ID and a non-null project name.
+### 🔗 Postman Collection
+Access the complete API documentation: [Managify Postman Collection](https://www.postman.com/spacecraft-astronaut-67997412/managify/overview)
 
+## 🧪 Testing
 
+The project includes comprehensive test coverage:
 
-### 5 November
+### Unit Tests
+- **User Service Tests**: Authentication and user management
+- **Project Service Tests**: CRUD operations and validations
+- **Issue Service Tests**: Issue lifecycle management
+- **Comment Service Tests**: Comment creation and deletion
 
-- **Comment Service**:
-  - **createComment**: Verified successful creation with valid `issueId` and `userId`; handled exceptions for invalid IDs.
-  - **deleteComment**: Confirmed deletion functionality, validated exception handling for non-existent comments, invalid users, and unauthorized deletions.
-  - **findCommentByIssue**: Checked that the method returns a non-empty list of comments for a given `issueId`.
+### Integration Tests
+- Database integration tests
+- Repository layer tests
+- Service layer integration tests
 
-- **Issue Service**:
-  - **getIssueById**: Ensured retrieval of issues by ID and proper exception handling for non-existent issues.
-  - **getIssueByProjectId**: Validated that issues can be retrieved by `projectId` and checked for exceptions if the project is not found.
-  - **createIssue**: Verified successful issue creation with valid data and project association.
-  - **deleteIssue**: Confirmed deletion of issues with appropriate checks for existence.
-  - **addUserToIssue**: Ensured users are added to issues and validated that proper exceptions are thrown for non-existent users and issues.
-  - **updateStatus**: Verified that issue status updates function correctly with valid IDs.
+### Run Tests
+```bash
+mvn test
+```
 
-- **User Service**:
-  - **loadUserByUsername**: Mocked user retrieval by email and ensured proper exception handling for non-existent users.
+## 🚀 Performance Features
 
-- **Project Service**:
-  - **getProjectById**: Validated project retrieval by ID with appropriate exception handling for non-existent projects.
+### Caching Strategy
+- **Project Listing**: Cached by user ID with category/tag filters
+- **Project Details**: Cached by project ID
+- **Search Results**: Cached search queries for improved response times
+- **Cache Invalidation**: Automatic cache updates on data modifications
+
+### Cache Operations
+- `GET /api/projects` - Cached project listings
+- `GET /api/projects/{id}` - Cached project details
+- `PATCH /api/projects/{id}` - Cache update on modification
+- `DELETE /api/projects/{id}` - Cache eviction on deletion
+
+## 🔒 Security Features
+
+- JWT-based authentication with 256-bit secure keys
+- Password encryption using BCrypt
+- Role-based access control
+- Secure API endpoints with authentication middleware
+- Input validation and sanitization
+
+## 📁 Project Structure
+
+```
+src/
+├── main/
+│   ├── java/com/managify/
+│   │   ├── config/          # Configuration classes
+│   │   ├── controller/      # REST controllers
+│   │   ├── dto/            # Data Transfer Objects
+│   │   ├── entity/         # JPA entities
+│   │   ├── repository/     # Data repositories
+│   │   ├── service/        # Business logic
+│   │   └── security/       # Security configuration
+│   └── resources/
+│       └── application.properties
+└── test/
+    └── java/com/managify/   # Test classes
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 Development Timeline
+
+The project was developed over several iterations with continuous improvements:
+- **Initial Setup** (Oct 20): Project initialization and database configuration
+- **Authentication** (Oct 21-22): JWT implementation and user management
+- **Core Features** (Oct 23-30): Entity relationships and business logic
+- **Performance** (Nov 3): Caching implementation
+- **Testing** (Nov 4-5): Comprehensive test coverage
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors
+
+- Your Name - Initial work
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the [API documentation](https://www.postman.com/spacecraft-astronaut-67997412/managify/overview)
+
+---
+
+**Managify** - Streamlining project management with modern technology solutions.
