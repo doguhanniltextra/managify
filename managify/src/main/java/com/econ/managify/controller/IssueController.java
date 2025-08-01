@@ -1,6 +1,6 @@
 package com.econ.managify.controller;
 
-import com.econ.managify.DTO.IssueDTO;
+import com.econ.managify.dtos.IssueDto;
 import com.econ.managify.interfaces.IssueService;
 import com.econ.managify.interfaces.UserService;
 import com.econ.managify.model.Issues;
@@ -33,11 +33,11 @@ public class IssueController {
         return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
     }
     @PostMapping
-    public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueRequest issue, @RequestHeader("Authorization") String token) throws Exception{
+    public ResponseEntity<IssueDto> createIssue(@RequestBody IssueRequest issue, @RequestHeader("Authorization") String token) throws Exception{
         User tokenUser = userService.findUserProfileByJwt(token);
         User user = userService.findUserById(tokenUser.getId());
             Issues createdIssue = issueService.createIssue(issue, tokenUser);
-            IssueDTO issueDTO = new IssueDTO();
+            IssueDto issueDTO = new IssueDto();
             issueDTO.setDescription(createdIssue.getDescription());
             issueDTO.setDueDate(createdIssue.getDueDate());
             issueDTO.setId(createdIssue.getId());

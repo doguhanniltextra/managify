@@ -1,4 +1,4 @@
-package com.econ.managify.DTO;
+package com.econ.managify.dtos;
 
 import com.econ.managify.model.Project;
 import com.econ.managify.model.User;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IssueDTO {
+public class IssueDto {
 
     private Long id;
     private String title;
@@ -20,7 +20,7 @@ public class IssueDTO {
     private Project project;
     private User assignee;
 
-    public IssueDTO() {
+    public IssueDto() {
 
     }
 
@@ -104,7 +104,7 @@ public class IssueDTO {
         this.assignee = assignee;
     }
 
-    public IssueDTO(Long id, String title, String description, String status, Long projectID, String priority, LocalDate dueDate, List<String> tags, Project project, User assignee) {
+    public IssueDto(Long id, String title, String description, String status, Long projectID, String priority, LocalDate dueDate, List<String> tags, Project project, User assignee) {
         this.id = id;
         this.title = title;
         this.description = description;
