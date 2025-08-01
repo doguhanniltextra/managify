@@ -49,7 +49,7 @@ public class IssueController {
             issueDTO.setTags(createdIssue.getTags());
             issueDTO.setTitle(createdIssue.getTitle());
             issueDTO.setAssignee(createdIssue.getAssigned());
-            
+
             return  ResponseEntity.ok(issueDTO);
     }
 
