@@ -1,7 +1,7 @@
 package com.econ.managify.dtos;
 
-import com.econ.managify.model.Project;
-import com.econ.managify.model.User;
+import com.econ.managify.models.Project;
+import com.econ.managify.models.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

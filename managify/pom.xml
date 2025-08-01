@@ -30,6 +30,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
 		<!-- Spring-boot Starter [JPA, Security, Web]-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -54,7 +55,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.0</version> <!-- En güncel sürüm -->
+			<version>5.9.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -62,7 +63,7 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>5.0.0</version> <!-- En güncel sürüm -->
+			<version>5.0.0</version>
 			<scope>test</scope>
 		</dependency>
 

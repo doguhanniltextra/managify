@@ -1,7 +1,6 @@
 package com.econ.managify.interfaces;
 
-import com.econ.managify.model.Chat;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.econ.managify.models.Chat;
 
 public interface ChatService  {
 
