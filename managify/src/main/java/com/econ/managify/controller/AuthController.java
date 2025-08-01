@@ -7,6 +7,7 @@ import com.econ.managify.repository.UserRepository;
 import com.econ.managify.request.loginRequest;
 import com.econ.managify.response.AuthResponse;
 import com.econ.managify.service.CustomUserDetailsService;
+import com.econ.managify.exceptions.AuthException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,9 +44,10 @@ public class AuthController {
     public ResponseEntity<User> createUserHandler(@RequestBody User user) throws Exception {
         User isUserExist = userRepository.findByEmail(user.getEmail());
 
-        if(isUserExist != null) {throw new Exception("Email Already Exists");}
+        if(isUserExist != null) {throw new AuthException("Email Already Exists");}
 
         User createdUser = new User();
+
         createdUser.setPassword(passwordEncoder.encode(user.getPassword()));
         createdUser.setEmail(user.getEmail());
         createdUser.setFullName(user.getFullName());
@@ -53,7 +56,8 @@ public class AuthController {
 
         subscriptionService.createSubscription(savedUser);
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(),
+                user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = JwtProvider.generateToken(authentication);
 
@@ -68,6 +72,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> loginUser(@RequestBody loginRequest loginRequest) {
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
+
 
         Authentication authentication = authenticate(username, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
