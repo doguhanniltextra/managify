@@ -99,10 +99,10 @@ The application will start on `http://localhost:8080`
 ## 🔗 API Endpoints
 
 ### Authentication
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/auth/signup` | POST | Register a new user |
-| `/auth/signing` | POST | User login |
+| Endpoint            | Method | Description |
+|---------------------|--------|-------------|
+| `/auth/create-user` | POST | Register a new user |
+| `/auth/login`       | POST | User login |
 
 ### User Management
 | Endpoint | Method | Description |
@@ -187,13 +187,12 @@ mvn test
 src/
 ├── main/
 │   ├── java/com/managify/
-│   │   ├── config/          # Configuration classes
-│   │   ├── controller/      # REST controllers
-│   │   ├── dto/            # Data Transfer Objects
-│   │   ├── entity/         # JPA entities
-│   │   ├── repository/     # Data repositories
-│   │   ├── service/        # Business logic
-│   │   └── security/       # Security configuration
+│   │   ├── configs/          # Configuration classes
+│   │   ├── controllers/      # REST controllers
+│   │   ├── dtos/            # Data Transfer Objects
+│   │   ├── models/         # JPA entities
+│   │   ├── repositories/     # Data repositories
+│   │   ├── services/        # Business logic
 │   └── resources/
 │       └── application.properties
 └── test/
@@ -216,6 +215,7 @@ The project was developed over several iterations with continuous improvements:
 - **Core Features** (Oct 23-30): Entity relationships and business logic
 - **Performance** (Nov 3): Caching implementation
 - **Testing** (Nov 4-5): Comprehensive test coverage
+- **Update** (Aug 1-3): Renamed all folders, enhanced exception handling 
 
 ## 📄 License
 
@@ -223,7 +223,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- Your Name - Initial work
+- Doğuhan İlter - Initial work
 
 ## 🆘 Support
 
@@ -232,6 +232,3 @@ For support and questions:
 - Contact the development team
 - Check the [API documentation](https://www.postman.com/spacecraft-astronaut-67997412/managify/overview)
 
----
-
-**Managify** - Streamlining project management with modern technology solutions.
