@@ -30,6 +30,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailsService customUserDetailsService;
     private final SubscriptionService subscriptionService;
+
     public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomUserDetailsService customUserDetailsService, SubscriptionService subscriptionService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -37,7 +38,7 @@ public class AuthController {
         this.subscriptionService = subscriptionService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/create-user")
     public ResponseEntity<User> createUserHandler(@RequestBody User user) throws Exception {
         User isUserExist = userRepository.findByEmail(user.getEmail());
 
@@ -57,14 +58,14 @@ public class AuthController {
         String jwt = JwtProvider.generateToken(authentication);
 
         AuthResponse response = new AuthResponse();
-        response.setMessage("Signup success");
+        response.setMessage("User is created");
         response.setJwt(jwt);
 
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/signing")
-    public ResponseEntity<AuthResponse> Signin(@RequestBody loginRequest loginRequest) {
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> loginUser(@RequestBody loginRequest loginRequest) {
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
