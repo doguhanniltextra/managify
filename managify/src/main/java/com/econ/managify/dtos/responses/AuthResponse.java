@@ -1,4 +1,4 @@
-package com.econ.managify.response;
+package com.econ.managify.dtos.responses;
 
 
 public class AuthResponse {

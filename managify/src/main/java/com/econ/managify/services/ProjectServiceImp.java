@@ -1,5 +1,6 @@
 package com.econ.managify.services;
 
+import com.econ.managify.exceptions.AuthException;
 import com.econ.managify.exceptions.MessageException;
 import com.econ.managify.exceptions.ProjectServiceException;
 import com.econ.managify.interfaces.ChatService;
@@ -57,7 +58,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectByTeam(User user, String category, String tag) throws Exception {
+    public List<Project> getProjectByTeam(User user, String category, String tag) throws AuthException {
         List<Project> projects = projectRepository.findByTeamContains(user);
 
         if (category != null) {
@@ -77,22 +78,22 @@ public class ProjectServiceImp implements ProjectService {
 
 
     @Override
-    public Project getProjectById(Long projectId) throws Exception {
+    public Project getProjectById(Long projectId) throws AuthException {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
         if(optionalProject.isEmpty()) {
-            throw new Exception("Project Not Found");
+            throw new AuthException("Project Not Found");
         }
         return optionalProject.get();
     }
 
     @Override
-    public void deleteProject(Long projectId, Long userId) throws Exception {
+    public void deleteProject(Long projectId, Long userId) throws AuthException {
         getProjectById(projectId);
         projectRepository.deleteById(projectId);
     }
 
     @Override
-    public Project updateProject(Project updatedProject, Long id) throws Exception {
+    public Project updateProject(Project updatedProject, Long id) throws AuthException {
         Project project = getProjectById(id);
         project.setName(updatedProject.getName());
         project.setDescription(updatedProject.getDescription());
@@ -101,7 +102,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public void addUserToProject(Long projectId, Long userId) throws Exception {
+    public void addUserToProject(Long projectId, Long userId) throws AuthException {
         Project project = getProjectById(projectId);
         User user = userService.findUserById(userId);
 
@@ -132,7 +133,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public List<Project> searchProjects(String keyword, User user) throws Exception {
+    public List<Project> searchProjects(String keyword, User user) throws AuthException {
         return projectRepository.findByNameContainingAndTeamContains(keyword, user);
     }
 

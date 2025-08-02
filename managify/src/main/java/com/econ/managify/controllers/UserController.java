@@ -1,6 +1,7 @@
 package com.econ.managify.controllers;
 
 
+import com.econ.managify.dtos.responses.UserGetUserProfileResponseDto;
 import com.econ.managify.exceptions.AuthException;
 import com.econ.managify.interfaces.UserService;
 import com.econ.managify.models.User;
@@ -22,8 +23,12 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<User> getUserProfile(@RequestHeader("Authorization") String jwt) throws AuthException {
+    public ResponseEntity<UserGetUserProfileResponseDto> getUserProfile(@RequestHeader("Authorization") String jwt) throws AuthException {
         User users = userService.findUserProfileByJwt(jwt);
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        UserGetUserProfileResponseDto userGetUserProfileResponseDto = new UserGetUserProfileResponseDto();
+
+        userGetUserProfileResponseDto.setEmail(users.getEmail());
+        userGetUserProfileResponseDto.setFullName(users.getFullName());
+        return new ResponseEntity<>(userGetUserProfileResponseDto, HttpStatus.OK);
     }
 }

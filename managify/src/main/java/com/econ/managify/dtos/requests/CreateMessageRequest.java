@@ -1,6 +1,6 @@
-package com.econ.managify.request;
+package com.econ.managify.dtos.requests;
 
-public class createMessageRequest {
+public class CreateMessageRequest {
     private Long senderId;
     private String content;
     private Long projectId;

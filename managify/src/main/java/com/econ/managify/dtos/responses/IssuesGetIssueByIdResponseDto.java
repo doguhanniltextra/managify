@@ -1,17 +1,13 @@
-package com.econ.managify.request;
+package com.econ.managify.dtos.responses;
 
 import java.time.LocalDate;
 
-public class IssueRequest {
+public class IssuesGetIssueByIdResponseDto {
     private String title;
     private String description;
     private String status;
-    private Long projectId;
     private String priority;
     private LocalDate dueDate;
-
-    public IssueRequest() {
-    }
 
     public String getTitle() {
         return title;
@@ -37,13 +33,6 @@ public class IssueRequest {
         this.status = status;
     }
 
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
 
     public String getPriority() {
         return priority;
@@ -58,15 +47,6 @@ public class IssueRequest {
     }
 
     public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public IssueRequest(String title, String description, String status, Long projectId, String priority, LocalDate dueDate) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.projectId = projectId;
-        this.priority = priority;
         this.dueDate = dueDate;
     }
 }

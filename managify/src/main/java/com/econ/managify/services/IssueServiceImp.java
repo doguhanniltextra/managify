@@ -1,5 +1,6 @@
 package com.econ.managify.services;
 
+import com.econ.managify.dtos.requests.IssuesCreateIssueRequestDto;
 import com.econ.managify.exceptions.IssueException;
 import com.econ.managify.interfaces.IssueService;
 import com.econ.managify.interfaces.ProjectService;
@@ -8,13 +9,12 @@ import com.econ.managify.models.Issues;
 import com.econ.managify.models.Project;
 import com.econ.managify.models.User;
 import com.econ.managify.repositories.IssueRepository;
-import com.econ.managify.request.IssueRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class IssueServiceImp implements IssueService {
+public abstract class IssueServiceImp implements IssueService {
 
     private final UserService userService;
     private final IssueRepository issueRepository;
@@ -40,7 +40,7 @@ public class IssueServiceImp implements IssueService {
     }
 
     @Override
-    public Issues createIssue(IssueRequest issueRequest, User user) throws IssueException {
+    public Issues createIssue(IssuesCreateIssueRequestDto issueRequest, User user) throws IssueException {
         Project project = projectService.getProjectById(issueRequest.getProjectId());
         Issues issues = new Issues();
         issues.setTitle(issueRequest.getTitle());

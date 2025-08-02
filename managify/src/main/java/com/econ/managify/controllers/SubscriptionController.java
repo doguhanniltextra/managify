@@ -1,5 +1,7 @@
 package com.econ.managify.controllers;
 
+import com.econ.managify.dtos.responses.SubscriptionGetUserSubscriptionResponseDto;
+import com.econ.managify.dtos.responses.SubscriptionsUpdateUserSubscriptionResponseDto;
 import com.econ.managify.exceptions.SubscriptionException;
 import com.econ.managify.interfaces.SubscriptionService;
 import com.econ.managify.interfaces.UserService;
@@ -23,17 +25,27 @@ public class SubscriptionController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<Subscription> getUserSubscription(@RequestHeader("Authorization") String jwt) throws SubscriptionException {
+    public ResponseEntity<SubscriptionGetUserSubscriptionResponseDto> getUserSubscription(@RequestHeader("Authorization") String jwt) throws SubscriptionException {
         User user = userService.findUserProfileByJwt(jwt);
         Subscription subscription = subscriptionService.getUserSubscription(user.getId());
 
-        return new ResponseEntity<>(subscription, HttpStatus.OK);
+        SubscriptionGetUserSubscriptionResponseDto subscriptionGetUserSubscriptionResponseDto = new SubscriptionGetUserSubscriptionResponseDto();
+
+        subscriptionGetUserSubscriptionResponseDto.setGetSubscriptionEndDate(subscription.getGetSubscriptionEndDate());
+        subscriptionGetUserSubscriptionResponseDto.setPlanType(subscription.getPlanType());
+
+        return new ResponseEntity<>(subscriptionGetUserSubscriptionResponseDto, HttpStatus.OK);
     }
 
     @PatchMapping("/upgrade")
-    public ResponseEntity<Subscription> upgradeUserSubscription(@RequestHeader("Authorization") String jwt, @RequestParam PlanType planType) throws SubscriptionException {
+    public ResponseEntity<SubscriptionsUpdateUserSubscriptionResponseDto> updateUserSubscription(@RequestHeader("Authorization") String jwt, @RequestParam PlanType planType) throws SubscriptionException {
         User user = userService.findUserProfileByJwt(jwt);
         Subscription subscription = subscriptionService.updateSubscription(user.getId(),planType);
-        return new ResponseEntity<>(subscription, HttpStatus.OK);
+
+        SubscriptionsUpdateUserSubscriptionResponseDto subscriptionsUpdateUserSubscriptionResponseDto = new SubscriptionsUpdateUserSubscriptionResponseDto();
+        subscriptionsUpdateUserSubscriptionResponseDto.setGetSubscriptionEndDate(subscription.getGetSubscriptionEndDate());
+        subscriptionsUpdateUserSubscriptionResponseDto.setPlanType(subscription.getPlanType());
+
+        return new ResponseEntity<>(subscriptionsUpdateUserSubscriptionResponseDto, HttpStatus.OK);
     }
 }

@@ -1,4 +1,4 @@
-package com.econ.managify.dtos;
+package com.econ.managify.dtos.responses;
 
 import com.econ.managify.models.Project;
 import com.econ.managify.models.User;

@@ -1,10 +1,9 @@
-package com.econ.managify.response;
+package com.econ.managify.dtos.responses;
 
-
-public class ApiResponse {
+public class IssuesDeleteIssueResponseDto {
     private String message;
 
-    public ApiResponse(String message) {
+    public IssuesDeleteIssueResponseDto(String message) {
         this.message = message;
     }
 

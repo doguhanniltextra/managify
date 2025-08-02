@@ -1,4 +1,4 @@
-package com.econ.managify.request;
+package com.econ.managify.dtos.requests;
 
 public class InviteRequest {
     private Long projectId;

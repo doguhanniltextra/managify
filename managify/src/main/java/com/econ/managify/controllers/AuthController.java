@@ -4,8 +4,8 @@ import com.econ.managify.configs.JwtProvider;
 import com.econ.managify.interfaces.SubscriptionService;
 import com.econ.managify.models.User;
 import com.econ.managify.repositories.UserRepository;
-import com.econ.managify.request.loginRequest;
-import com.econ.managify.response.AuthResponse;
+import com.econ.managify.dtos.requests.LoginRequest;
+import com.econ.managify.dtos.responses.AuthResponse;
 import com.econ.managify.services.CustomUserDetailsService;
 import com.econ.managify.exceptions.AuthException;
 
@@ -69,7 +69,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> loginUser(@RequestBody loginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 

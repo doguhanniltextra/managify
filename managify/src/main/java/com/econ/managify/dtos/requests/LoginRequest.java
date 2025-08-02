@@ -1,7 +1,7 @@
-package com.econ.managify.request;
+package com.econ.managify.dtos.requests;
 
 
-public class loginRequest {
+public class LoginRequest {
     private String email;
     private String password;
 

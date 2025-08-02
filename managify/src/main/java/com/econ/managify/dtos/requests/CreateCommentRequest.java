@@ -1,9 +1,13 @@
-package com.econ.managify.request;
+package com.econ.managify.dtos.requests;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class CreateCommentRequest {
+
   private Long issueId;
+  @NotBlank(message = "content cannot be null.")
+  @Size(min = 0, max = 10000)
   private String content;
 
 

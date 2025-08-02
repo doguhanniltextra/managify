@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
 
     private String name;

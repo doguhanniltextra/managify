@@ -14,49 +14,34 @@ public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
 
-
     public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-
     @Override
     public User findUserProfileByJwt(String jwt) throws AuthException {
         String email = JwtProvider.getEmailFromToken(jwt);
-
         return findUserByEmail(email);
     }
 
     @Override
     public User findUserByEmail(String email) throws AuthException {
         User user = userRepository.findByEmail(email);
-
-        if(user == null) {
-            throw new AuthException("User Not Found");
-        }
-
+        if(user == null) throw new AuthException("User Not Found");
         return user;
     }
 
     @Override
     public User findUserById(Long userId) throws AuthException {
         Optional<User> optionalUser = userRepository.findById(userId);
-
-        if(optionalUser.isEmpty()) {
-            throw new AuthException("User Not Found");
-        }
-
+        if(optionalUser.isEmpty()) throw new AuthException("User Not Found");
         return optionalUser.get();
     }
 
     @Override
     public User updateUsersProjectSize(User user, int number) throws AuthException {
         user.setProjectSize(user.getProjectSize()+number);
-
-        if(number < 0) {
-            throw new AuthException("Given number cannot be negative");
-        }
-
+        if(number < 0) throw new AuthException("Given number cannot be negative");
         return userRepository.save(user);
     }
 }
