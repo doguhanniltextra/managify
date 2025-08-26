@@ -1,279 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Managify Project Documentation</title>
-    <link rel="icon" href="./img.png" type="image/x-icon">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" href="./img.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <header>
-        <h1>Managify Project Documentation (OS)</h1>
-        <nav>
-            <ul>
-                <li><a href="#daily-updates">Daily Project Updates</a></li>
-                <li><a href="#database-schema">Database Overview</a></li>
-                <li><a href="#service-enhancements">Service Enhancements</a></li>
-                <li><a href="#api-endpoints">API Endpoints</a></li>
-                <li><a href="#cache-management">Cache Management</a></li>
-                <li><a href="#unit-tests">Unit Tests</a></li>
-            </ul>
-        </nav>
+<div class="page-wrapper">
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="./img.png" alt="Managify logo" class="logo" />
+                <div class="brand-text">
+                    <h1>Managify</h1>
+                    <p class="tagline">Project management made simple</p>
+                </div>
+            </div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#daily-updates">Daily</a></li>
+                    <li><a href="#project-roadmap">Roadmap</a></li>
+                    <li><a href="#database-schema">Database</a></li>
+                    <li><a href="#service-enhancements">Enhancements</a></li>
+                    <li><a href="#api-endpoints">API</a></li>
+                    <li><a href="#unit-tests">Tests</a></li>
+                    <li><a href="#installation">Install</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
 
-    <section id="project-roadmap">
-
-    <h2>Daily Project Updates</h2>
-    <div class="gif-container">
-        <img src="./Managify_calendar.gif" alt="Project Calendar Animation" />
-    </div>
-</section>
-   
-
-
-<section id="project-roadmap">
-    <h2>Project Roadmap</h2>
-    <div class="gif-container">
-        <img src="./Managify.gif" alt="Project Roadmap Animation" />
-    </div>
-</section>
-
-
-        <section id="database-schema">
-            <h2>Database Schema Overview</h2>
-            <div class="content">
-                <strong>Entities:</strong>
-                <ul>
-                    <li>Users: Manages user details like name, email, and project count.</li>
-                    <li>Issues: Tracks project-related issues with title, status, priority, and tags.</li>
-                    <li>Projects: Contains project data like name, description, and category.</li>
-                    <li>Chat: Represents user-project group chats.</li>
-                    <li>Messages: Stores chat messages with timestamps.</li>
-                    <li>Comments: Tracks comments on issues.</li>
-                </ul>
-                <strong>Relationships:</strong>
-                <ul>
-                    <li>Users relate to Issues and Comments.</li>
-                    <li>Issues connect to Projects and Comments.</li>
-                    <li>Chat links Messages, Users, and Projects.</li>
-                </ul>
+    <main class="content-area">
+        <section id="daily-updates" class="hero">
+            <div class="hero-content">
+                <h2>Daily Project Updates</h2>
+                <p class="lead">Quick snapshots of sprints, milestones and today's top items so the team stays aligned.</p>
+                <div class="hero-actions">
+                    <a class="btn primary" href="#project-roadmap">View Roadmap</a>
+                    <a class="btn ghost" href="#api-endpoints">API Reference</a>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="media-card">
+                    <img src="./Managify_calendar.gif" alt="Project Calendar Animation" />
+                </div>
             </div>
         </section>
 
-        <section id="service-enhancements">
-            <h2>Service Enhancements</h2>
-            <div class="content">
-                <strong>25-30 October:</strong> Service Enhancements, Repository Optimization, DTO Refinements, and Controller Updates.
-                <p>Improved multiple controllers and services (e.g., ChatService, ProjectService) for better functionality and performance.</p>
+        <section id="project-roadmap" class="section two-col">
+            <div class="card">
+                <h3>Project Roadmap</h3>
+                <p>High-level milestones, delivery targets and upcoming releases.</p>
+                <div class="preview-img">
+                    <img src="./Managify.gif" alt="Roadmap animation" />
+                </div>
+            </div>
+
+
+        </section>
+
+        <section id="database-schema" class="section">
+            <div class="card">
+                <h3>Database Schema Overview</h3>
+                <div class="content-block">
+                    <strong>Entities</strong>
+                    <ul>
+                        <li><strong>Users</strong> — Manages user details and project assignments</li>
+                        <li><strong>Projects</strong> — Project metadata, categories, tags</li>
+                        <li><strong>Issues</strong> — Title, status, priority, tags</li>
+                        <li><strong>Chat & Messages</strong> — Group chat per project with messages and timestamps</li>
+                        <li><strong>Comments</strong> — Comments linked to issues</li>
+                    </ul>
+
+                    <strong>Relationships</strong>
+                    <ul>
+                        <li>Users ↔ Issues, Comments</li>
+                        <li>Issues ↔ Projects, Comments</li>
+                        <li>Chat ↔ Projects, Users, Messages</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
- <section id="api-endpoints">
-    <h2>API Endpoints</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>/auth/signup</td>
-                <td>POST</td>
-                <td>Register a new user</td>
-            </tr>
-            <tr>
-                <td>/auth/signing</td>
-                <td>POST</td>
-                <td>Log in a user</td>
-            </tr>
-            <tr>
-                <td>/api/users/profile</td>
-                <td>GET</td>
-                <td>Retrieve user profile</td>
-            </tr>
-            <tr>
-                <td>/api/projects</td>
-                <td>POST</td>
-                <td>Create a new project</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{id}</td>
-                <td>GET</td>
-                <td>Get project by ID</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{id}</td>
-                <td>DELETE</td>
-                <td>Delete project by ID</td>
-            </tr>
-            <tr>
-                <td>/api/projects</td>
-                <td>GET</td>
-                <td>Get all projects</td>
-            </tr>
-            <tr>
-                <td>/api/projects/search?keyword={keyword}</td>
-                <td>GET</td>
-                <td>Search projects by keyword</td>
-            </tr>
-            <tr>
-                <td>/api/issues</td>
-                <td>POST</td>
-                <td>Create a new issue</td>
-            </tr>
-            <tr>
-                <td>/api/issues/{id}</td>
-                <td>GET</td>
-                <td>Get issue by user ID</td>
-            </tr>
-            <tr>
-                <td>/api/issues/project/{projectId}</td>
-                <td>GET</td>
-                <td>Get all issues by project ID</td>
-            </tr>
-            <tr>
-                <td>/api/issues/{id}/status/{status}</td>
-                <td>PUT</td>
-                <td>Update issue status</td>
-            </tr>
-            <tr>
-                <td>/api/issues/{id}/status/{status}</td>
-                <td>DELETE</td>
-                <td>Delete issue status</td>
-            </tr>
-            <tr>
-                <td>/api/issues/{id}/assignee/{userId}</td>
-                <td>PUT</td>
-                <td>Assign an issue to a user</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{id}/chat</td>
-                <td>GET</td>
-                <td>Retrieve chat by project ID</td>
-            </tr>
-            <tr>
-                <td>/api/messages/chat/{projectId}</td>
-                <td>GET</td>
-                <td>Get messages by project ID</td>
-            </tr>
-            <tr>
-                <td>/api/messages/send</td>
-                <td>POST</td>
-                <td>Send a new message</td>
-            </tr>
-            <tr>
-                <td>/api/comments/{id}</td>
-                <td>GET</td>
-                <td>Get a comment by ID</td>
-            </tr>
-            <tr>
-                <td>/api/projects/search</td>
-                <td>GET</td>
-                <td>Search projects by keyword (cached)</td>
-            </tr>
-            <tr>
-                <td>/api/projects</td>
-                <td>GET</td>
-                <td>Cached based on user ID, category, and tag filters.</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{projectId}</td>
-                <td>GET</td>
-                <td>Cached by project ID.</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{projectId}</td>
-                <td>PATCH</td>
-                <td>Updates associated cache entry on project update.</td>
-            </tr>
-            <tr>
-                <td>/api/projects/{projectId}</td>
-                <td>DELETE</td>
-                <td>Removes corresponding project data from cache upon deletion.</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-        <section id="unit-tests">
-            <h2>Unit Tests</h2>
-            <div class="content">
-                <h3>Service and Repository Testing</h3>
-                <p>
-                    Implemented unit tests for key services and repositories using Mockito:
-                </p>
-                <ul>
-                    <li>Mocked repository methods to test service layer functionality.</li>
-                    <li>Ensured the correctness of the user authentication process.</li>
-                    <li>Tested project and issue management operations to validate business logic.</li>
-                    <li>Utilized assertions to confirm expected outcomes for various scenarios.</li>
-                    <li>Conducted edge case testing to ensure robust error handling.</li>
-                </ul>
-                <p>
-                    The testing approach enhances reliability and helps maintain code quality throughout the development process.
-                </p>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Installation</h2>
-            <div class="content">
-                <p>Follow these steps to set up the Managify project on your local machine.</p>
-                <h3>Prerequisites</h3>
-                <ul>
-                    <li>Java Development Kit (JDK) 11 or higher</li>
-                    <li>Apache Maven</li>
-                    <li>PostgreSQL Database</li>
-                    <li>An IDE (e.g., IntelliJ, Eclipse)</li>
-                </ul>
-
-                <h3>Clone the Repository</h3>
-                <pre><code align="center">
-                    git clone https://github.com/doguhannilt/managify.git
-                </code></pre>
-
-                <h3>Configure Application Properties</h3>
-                <p>In the <code>src/main/resources</code> directory, locate <code>application.properties</code> and add your PostgreSQL credentials and JWT settings as follows:</p>
-                <pre><code>
-                    # Application Name
-                    spring.application.name=managify
-
-                    # Database Configuration
-                    spring.datasource.url=jdbc:postgresql://localhost:5432/Managify
-                    spring.datasource.username=your_db_username
-                    spring.datasource.password=your_db_password
-                    spring.datasource.driver-class-name=org.postgresql.Driver
-
-                    # JPA and Hibernate Settings
-                    spring.jpa.hibernate.ddl-auto=update
-                    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-
-                    # JWT Settings
-                    jwt.secret-key=YOUR_SECRET_KEY
-                    jwt.expiration-ms=3600000
-                </code></pre>
-
-                <h3>Verify the Setup</h3>
-                <p>Once the application is running, visit <code>http://localhost:8080/api</code> to ensure that everything is configured properly.</p>
+        <section id="api-endpoints" class="section">
+            <h2>API Endpoints</h2>
+            <div class="table-wrap">
+                <table class="api-table" aria-label="API endpoints table">
+                    <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>/auth/signup</td><td>POST</td><td>Register a new user</td></tr>
+                    <tr><td>/auth/signing</td><td>POST</td><td>Log in a user</td></tr>
+                    <tr><td>/api/users/profile</td><td>GET</td><td>Retrieve user profile</td></tr>
+                    <tr><td>/api/projects</td><td>POST</td><td>Create a new project</td></tr>
+                    <tr><td>/api/projects/{id}</td><td>GET</td><td>Get project by ID</td></tr>
+                    <tr><td>/api/projects/{id}</td><td>DELETE</td><td>Delete project by ID</td></tr>
+                    <tr><td>/api/projects</td><td>GET</td><td>Get all projects</td></tr>
+                    <tr><td>/api/projects/search?keyword={keyword}</td><td>GET</td><td>Search projects by keyword</td></tr>
+                    <tr><td>/api/issues</td><td>POST</td><td>Create a new issue</td></tr>
+                    <tr><td>/api/issues/{id}</td><td>GET</td><td>Get issue by user ID</td></tr>
+                    <tr><td>/api/issues/project/{projectId}</td><td>GET</td><td>Get all issues by project ID</td></tr>
+                    <tr><td>/api/issues/{id}/status/{status}</td><td>PUT</td><td>Update issue status</td></tr>
+                    <tr><td>/api/issues/{id}/assignee/{userId}</td><td>PUT</td><td>Assign an issue to a user</td></tr>
+                    <tr><td>/api/projects/{id}/chat</td><td>GET</td><td>Retrieve chat by project ID</td></tr>
+                    <tr><td>/api/messages/chat/{projectId}</td><td>GET</td><td>Get messages by project ID</td></tr>
+                    <tr><td>/api/messages/send</td><td>POST</td><td>Send a new message</td></tr>
+                    <tr><td>/api/comments/{id}</td><td>GET</td><td>Get a comment by ID</td></tr>
+                    <tr><td>/api/projects/search</td><td>GET</td><td>Search projects by keyword (cached)</td></tr>
+                    <tr><td>/api/projects/{projectId}</td><td>PATCH</td><td>Update project & refresh cache</td></tr>
+                    <tr><td>/api/projects/{projectId}</td><td>DELETE</td><td>Delete project & invalidate cache</td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <section>
-            <h2>Contact Me</h2>
-            <div class="content">
-                <p>If you have any questions, feedback, or suggestions about Managify, feel free to reach out!</p>
-                <h3>Email</h3>
-                <p><a href="mailto:doguhannilt@gmail.com">doguhannilt@gmail.com</a></p>
+        <section id="unit-tests" class="section">
+            <div class="card">
+                <h3>Unit Tests</h3>
+                <p>Service and repository tests using Mockito: authentication flows, project/issue operations, and edge-case coverage to ensure robust behavior.</p>
+            </div>
+        </section>
+
+        <section id="installation" class="section">
+            <div class="card">
+                <h3>Installation</h3>
+                <div class="content-block">
+                    <h4>Prerequisites</h4>
+                    <ul>
+                        <li>JDK 11+</li>
+                        <li>Apache Maven</li>
+                        <li>PostgreSQL database</li>
+                        <li>IDE (IntelliJ / Eclipse)</li>
+                    </ul>
+
+                    <h4>Clone</h4>
+                    <pre><code>git clone https://github.com/doguhannilt/managify.git</code></pre>
+
+                    <h4>application.properties</h4>
+                    <pre><code># DB and JWT example
+spring.application.name=managify
+spring.datasource.url=jdbc:postgresql://localhost:5432/Managify
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+jwt.secret-key=YOUR_SECRET_KEY
+jwt.expiration-ms=3600000</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="card">
+                <h3>Contact</h3>
+                <p>Questions or feedback? <a href="mailto:doguhannilt@gmail.com">doguhannilt@gmail.com</a></p>
             </div>
         </section>
     </main>
-    <footer>
-        <p>2024 - Managify Project</p>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>© 2024 Managify Project</p>
+        </div>
     </footer>
+</div>
+
+<script>
+    // Mobile nav toggle
+    (function () {
+        const btn = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.main-nav');
+        btn && btn.addEventListener('click', () => {
+            nav && nav.classList.toggle('open');
+        });
+    })();
+</script>
 </body>
 </html>
